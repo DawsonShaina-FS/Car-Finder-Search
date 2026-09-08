@@ -1,0 +1,380 @@
+// ========================================
+// CAR FINDER
+// ========================================
+
+.car-finder {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+  overflow: hidden;
+
+  // Background image + dark overlay
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.48),
+      rgba(0, 0, 0, 0.62)),
+    url("../../assets/car-finder-bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  // ========================================
+  // CONTENT
+  // ========================================
+
+  &__content {
+    width: calc(100% - 48px);
+    max-width: 1498px;
+
+    margin: 0 auto;
+    padding-top: 340px;
+
+    position: relative;
+    z-index: 2;
+
+    h1 {
+      margin: 0;
+
+      color: #fff;
+
+      font-size: 43px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      margin: 28px 0 0;
+
+      color: rgba(255, 255, 255, 0.78);
+
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1.45;
+      letter-spacing: 1.5px;
+    }
+  }
+
+  // ========================================
+  // FORM
+  // ========================================
+
+  &__form {
+    width: 100%;
+    min-height: 326px;
+
+    margin-top: 43px;
+    padding: 42px 42px 28px;
+
+    box-sizing: border-box;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    background: rgba(248, 248, 248, 0.97);
+    border-radius: 10px;
+
+    position: relative;
+    z-index: 3;
+  }
+
+  // ========================================
+  // FORM GROUP
+  // ========================================
+
+  .form-group {
+    position: relative;
+
+    padding: 0 42px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    // Vertical divider
+    &:not(:last-child)::after {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      right: 0;
+
+      width: 2px;
+      height: 198px;
+
+      background: #e1e1e1;
+    }
+
+    // First column sits slightly closer
+    &:first-child {
+      padding-left: 12px;
+    }
+
+    // ====================================
+    // Large "Year / Make / Model" heading
+    // ====================================
+
+    label {
+      margin: 0 0 70px;
+
+      color: #999;
+
+      font-size: 43px;
+      font-weight: 700;
+      line-height: 1;
+
+      cursor: default;
+    }
+
+    // ====================================
+    // SELECT
+    // ====================================
+
+    select {
+      width: 100%;
+      height: 59px;
+
+      padding: 0 42px 0 16px;
+
+      box-sizing: border-box;
+
+      appearance: none;
+      -webkit-appearance: none;
+
+      background-color: transparent;
+
+      border: 1px solid #aaa;
+      border-radius: 4px;
+
+      color: #999;
+
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+
+      outline: none;
+
+      cursor: pointer;
+
+      transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+
+      &:focus {
+        border-color: #3898c5;
+
+        box-shadow: 0 0 0 1px rgba(56, 152, 197, 0.15);
+      }
+
+      &:disabled {
+        color: #aaa;
+        background-color: #f7f7f7;
+
+        cursor: not-allowed;
+      }
+    }
+
+    // ====================================
+    // Floating label above select
+    //
+    // We use the existing label, but since
+    // it's currently the large heading, we
+    // create the small label with ::before
+    // ====================================
+
+    &:nth-child(1) {
+      select {
+        border-color: #3898c5;
+      }
+    }
+
+    &::before {
+      position: absolute;
+
+      left: 54px;
+      top: 96px;
+
+      padding: 0 4px;
+
+      background: #f8f8f8;
+
+      color: #999;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      z-index: 2;
+    }
+
+    &:first-child::before {
+      content: "Year";
+      left: 24px;
+      color: #3898c5;
+    }
+
+    &:nth-child(2)::before {
+      content: "Make";
+    }
+
+    &:nth-child(3)::before {
+      content: "Model";
+    }
+
+    // ====================================
+    // Dropdown arrow
+    // ====================================
+
+    &::after {
+      // handled separately below
+    }
+  }
+
+  // Custom dropdown arrows
+  .form-group {
+    select {
+      background-image: none;
+    }
+
+    // Wrapper isn't available in your HTML,
+    // so use the select's pseudo styling via
+    // a background SVG.
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23999999' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 17px center;
+  }
+
+  // ========================================
+  // RESPONSIVE
+  // ========================================
+
+  @media (max-width: 1200px) {
+    &__content {
+      padding-top: 260px;
+
+      h1 {
+        font-size: 38px;
+      }
+    }
+
+    &__form {
+      padding: 35px 25px;
+    }
+
+    .form-group {
+      padding: 0 25px;
+
+      &:first-child {
+        padding-left: 10px;
+      }
+
+      label {
+        font-size: 36px;
+      }
+
+      &::before {
+        left: 37px;
+      }
+
+      &:first-child::before {
+        left: 22px;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    background-position: center center;
+
+    &__content {
+      width: calc(100% - 40px);
+      padding-top: 160px;
+
+      h1 {
+        font-size: 32px;
+      }
+
+      p {
+        margin-top: 18px;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+    }
+
+    &__form {
+      width: calc(100% - 40px);
+
+      margin-top: 35px;
+      padding: 30px 25px;
+
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+
+    .form-group {
+      padding: 0 !important;
+
+      &:not(:last-child)::after {
+        display: none;
+      }
+
+      label {
+        margin-bottom: 45px;
+        font-size: 32px;
+      }
+
+      &::before,
+      &:first-child::before {
+        left: 12px;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    &__content {
+      width: calc(100% - 24px);
+      padding-top: 100px;
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+
+    &__form {
+      width: calc(100% - 24px);
+
+      padding: 25px 20px;
+    }
+
+    .form-group {
+      label {
+        font-size: 28px;
+      }
+    }
+  }
+}
+
+
+// ========================================
+// GLOBAL RESET
+// ========================================
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
